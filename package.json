@@ -1,2 +1,5 @@
 npm init -y
 npm install node-fetch
+"dependencies": {
+  "node-fetch": "^2.6.1"
+}
