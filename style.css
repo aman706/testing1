@@ -1,0 +1,384 @@
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9fbfd;
+  color: #222;
+  transition: background 0.4s, color 0.4s;
+}
+
+body.dark {
+  background: #121212;
+  color: #eee;
+}
+
+.hero {
+  padding: 60px 20px 40px;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.hero-text {
+  max-width: 400px;
+  text-align: left;
+}
+
+.hero-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.main-title {
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff6a00, #ee0979, #00c9ff);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientText 5s ease infinite;
+}
+
+@keyframes gradientText {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.typed-text {
+  font-size: 1.3rem;
+  margin-top: 12px;
+  height: 28px;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.dark .navbar {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #007bff;
+}
+
+body.dark .nav-links a {
+  color: #66bfff;
+}
+
+.main-content {
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  text-align: left;
+}
+
+
+
+@media (max-width: 768px) {
+  .main-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .main-content section {
+    text-align: center !important;
+  }
+
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+}
+
+.email-button a {
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.social-icons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icons img {
+  width: 36px;
+  height: 36px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons a:hover img {
+  transform: scale(1.2);
+}
+
+footer {
+  padding: 20px;
+  background: #f1f1f1;
+  text-align: center;
+}
+
+body.dark footer {
+  background: #1e1e1e;
+}
+
+.dark-mode-toggle {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  background: #ddd;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+body.dark .dark-mode-toggle {
+  background: #444;
+  color: #fff;
+}
+
+.floating-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating-icons span {
+  position: absolute;
+  font-size: 2rem;
+  animation: floatIcon 10s infinite linear alternate;
+}
+
+.floating-icons span:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+.floating-icons span:nth-child(2) { top: 50%; left: 70%; animation-delay: 3s; }
+.floating-icons span:nth-child(3) { top: 32%; left: 50%; animation-delay: 6s; }
+
+@keyframes floatIcon {
+  0% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+  50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+  100% { transform: translateY(0px) rotate(360deg); opacity: 0.6; }
+}
+
+.floating-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 70%, rgba(0, 200, 255, 0.1) 0%, transparent 50%);
+  z-index: -1;
+  animation: floatBubbles 25s ease-in-out infinite;
+}
+
+@keyframes floatBubbles {
+  0% { background-position: 20% 30%, 80% 60%; }
+  100% { background-position: 80% 60%, 20% 30%; }
+}
+
+
+/* Refined Layout Adjustments */
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.hero-pic {
+  width: 160px;
+  height: 160px;
+  flex-shrink: 0;
+}
+.hero-text {
+  flex: 1;
+  min-width: 250px;
+  margin-left: 20px;
+}
+@media (max-width: 768px) {
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text {
+    margin-left: 0;
+    max-width: 90%;
+  }
+
+  .main-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .main-content section {
+    text-align: center;
+  }
+}
+section {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.hero, .navbar, .main-content, footer {
+  position: relative;
+  z-index: 1;
+}
+
+#particles-js {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.social-icons img {
+  width: 32px;
+  height: 32px;
+}
+
+
+/* FIX: Limit Gmail icon size */
+.email-button img {
+  width: 24px;
+  height: 24px;
+}
+
+/* FIX: Ensure profile picture visibility and aspect ratio */
+.hero-pic {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+/* FIX: Adjust emoji icon placement */
+.floating-icons span:nth-child(1) { top: 15%; left: 10%; }
+.floating-icons span:nth-child(2) { top: 45%; left: 75%; }
+.floating-icons span:nth-child(3) { top: 75%; left: 25%; }
+
+
+/* FIX: Consistent section alignment */
+.main-content section {
+  text-align: left;
+}
+
+/* Mobile override: center alignment for readability */
+@media (max-width: 768px) {
+  .main-content section {
+    text-align: center !important;
+  }
+}
+
+
+/* Show ⚡ only in dark mode */
+body:not(.dark) .floating-icons span:nth-child(3) {
+  display: none;
+}
+
+
+/* Contact form styles */
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: 20px auto;
+}
+#contact-form input,
+#contact-form textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+#contact-form button {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#contact-form button:hover {
+  background: #0056b3;
+}
+
+/* Typing cursor */
+.typed-text::after {
+  content: '|';
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Back to Top Button */
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: none;
+  cursor: pointer;
+  z-index: 999;
+}
+#backToTop:hover {
+  background: #555;
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:title" content="Aminul Haque - Portfolio">
+  <meta property="og:image" content="profile.png">
+  <meta property="og:description" content="Creative web developer and solar designer">
+  <title>Aminul Haque - Personal Website</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div class="floating-icons">
+    <span>💻</span>
+    <span>🎨</span>
+    <span>⚡</span>
+  </div>
+  <div class="floating-bg"></div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <img src="profile.png" alt="Profile Picture" class="hero-pic">
+      <div class="hero-text">
+        <h1 class="main-title">Aminul Haque</h1>
+        <p class="typed-text"><span id="typed"></span></p>
+        <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle Dark Mode">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <section id="about" data-aos="fade-up">
+      <h2>About Me</h2>
+      <p>I'm Aminul Haque — a multi-faceted web designer with a flair for turning creative concepts into engaging, interactive digital experiences. I believe design isn't just how something looks, but how it works, and I strive to build user interfaces that are not only visually appealing but functionally seamless.
+
+With a Bachelor's degree in Solar Energy, I bring a unique perspective to technology — one that blends innovation with sustainability. I've worked on solar system designs, combining technical know-how with a mission to create greener solutions for the future.
+
+In addition to design, I'm proficient in Python programming, using it to automate, analyze, and bring ideas to life through code. Whether it's scripting a tool or building interactive content, I enjoy the problem-solving aspect of development.
+
+Outside the tech world, I'm a passionate chess player, always thinking a few steps ahead — both on the board and in life. I’m also a dedicated blogger, sharing insights on tech, creativity, and personal growth. And when words need rhythm, I turn to Shayari, using poetry as a way to express what logic cannot.
+
+Whether I’m building a site, designing a solar setup, writing a Python script, or crafting a verse — I’m always creating, always evolving.</p>
+    </section>
+
+    <section id="skills" data-aos="fade-right">
+      <h2>Skills</h2>
+      <ul>
+        <li>HTML/CSS</li>
+        <li>JavaScript</li>
+        <li>Web Animations</li>
+        <li>Responsive Design</li>
+        <li>Python</li>
+        <li>AutoCad 2D</li>
+        <li>Solar Designer</li>
+        <li>O&M in Solar Plant</li>
+        <li>QC/QA</li>
+      </ul>
+    </section>
+
+    <section id="projects" data-aos="fade-left">
+      <h2>Experience</h2>
+      <ul>
+        <li><p><b>WATTMONK</b><br>Management Trainee</p></li>
+        <li><p><b>Solar Design Expert</b><br>Solar Designing</p></li>
+        <li><p><b>Future AI</b><br>O&M in Solar Projects</p></li>
+      </ul>
+    </section>
+
+    <section id="contact" data-aos="zoom-in">
+      <h2>Contact Me</h2>
+      <form id="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+
+      <div class="email-button">
+        <a href="mailto:amansheyak1@gmail.com" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail icon"> Gmail Me
+        </a>
+      </div>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/aminul_haque85/" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+        </a>
+        <a href="https://www.linkedin.com/in/md-aminul-haque-429150263/" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+        </a>
+        <a href="https://github.com/aman706" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+        </a>
+      </div>
+    </section>
+
+    <button id="backToTop">↑</button>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Aminul Haque. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    AOS.init({ duration: 1200, once: true });
+    VanillaTilt.init(document.querySelector(".hero-pic"), {
+      max: 15,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.4
+    });
+    particlesJS.load('particles-js', 'particles.json', function() {
+      console.log('Particles loaded');
+    });
+  </script>
+</body>
+</html>
