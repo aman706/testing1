@@ -1,0 +1,9 @@
+{
+  "particles": {
+    "number": { "value": 40 },
+    "size": { "value": 3 },
+    "move": { "speed": 1 },
+    "line_linked": { "enable": true },
+    "opacity": { "value": 0.3 }
+  }
+}
