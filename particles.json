@@ -7,3 +7,12 @@
     "opacity": { "value": 0.3 }
   }
 }
+{
+  "name": "testing1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
