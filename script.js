@@ -113,12 +113,16 @@ style.innerHTML = `
 document.head.appendChild(style);
 const catchBtn = document.getElementById("catch-me");
 const secretMsg = document.getElementById("secret-msg");
+
 let attempts = 0;
+let gameStarted = false;
+
 const catchTexts = [
-  "Too Slow!", "Missed Me!", "Try Again!", "Haha!", "Almost!", 
+  "Too Slow!", "Missed Me!", "Try Again!", "Haha!", "Almost!",
   "Nope!", "Nice Try!", "Keep Going!", "Getting Closer!", "You Wish!"
 ];
 
+// Function to move button randomly but stay within the screen
 function moveButton() {
   const btnWidth = catchBtn.offsetWidth;
   const btnHeight = catchBtn.offsetHeight;
@@ -133,19 +137,33 @@ function moveButton() {
   catchBtn.style.left = `${x}px`;
   catchBtn.style.top = `${y}px`;
 
-  // Optional: Add funny text
-  const catchTexts = [
-    "Too Slow!", "Missed Me!", "Try Again!", "Haha!", "Almost!",
-    "Nope!", "Nice Try!", "Keep Going!", "Getting Closer!", "You Wish!"
-  ];
+  // Set random funny message
   catchBtn.innerText = catchTexts[Math.floor(Math.random() * catchTexts.length)];
 }
 
+// Reveal the hidden message after 30 failed attempts
+function revealSecret() {
+  catchBtn.style.display = "none";
+  secretMsg.style.display = "block";
+}
 
+// Mouse movement logic
 document.addEventListener("mousemove", (e) => {
+  gameStarted = true;
+
   const rect = catchBtn.getBoundingClientRect();
-  const dist = Math.hypot(e.clientX - rect.left, e.clientY - rect.top);
-  if (dist < 100) {
+  const mouseX = e.clientX;
+  const mouseY = e.clientY;
+
+  const insideButton =
+    mouseX >= rect.left &&
+    mouseX <= rect.right &&
+    mouseY >= rect.top &&
+    mouseY <= rect.bottom;
+
+  const dist = Math.hypot(mouseX - (rect.left + rect.width / 2), mouseY - (rect.top + rect.height / 2));
+
+  if (dist < 100 && !insideButton && gameStarted) {
     if (attempts >= 30) return;
     moveButton();
     attempts++;
@@ -153,7 +171,10 @@ document.addEventListener("mousemove", (e) => {
   }
 });
 
+// Touch logic for mobile
 catchBtn.addEventListener("touchstart", (e) => {
+  gameStarted = true;
+
   if (attempts >= 30) return;
   moveButton();
   attempts++;
@@ -161,9 +182,5 @@ catchBtn.addEventListener("touchstart", (e) => {
   if (attempts === 30) revealSecret();
 }, { passive: false });
 
-function revealSecret() {
-  catchBtn.style.display = "none";
-  secretMsg.style.display = "block";
-}
 
 
