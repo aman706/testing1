@@ -111,4 +111,44 @@ style.innerHTML = `
   }
 }`;
 document.head.appendChild(style);
+const catchBtn = document.getElementById("catch-me");
+const secretMsg = document.getElementById("secret-msg");
+let attempts = 0;
+const catchTexts = [
+  "Too Slow!", "Missed Me!", "Try Again!", "Haha!", "Almost!", 
+  "Nope!", "Nice Try!", "Keep Going!", "Getting Closer!", "You Wish!"
+];
+
+function moveButton() {
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 80);
+  catchBtn.style.left = `${x}px`;
+  catchBtn.style.top = `${y}px`;
+  catchBtn.innerText = catchTexts[Math.floor(Math.random() * catchTexts.length)];
+}
+
+document.addEventListener("mousemove", (e) => {
+  const rect = catchBtn.getBoundingClientRect();
+  const dist = Math.hypot(e.clientX - rect.left, e.clientY - rect.top);
+  if (dist < 100) {
+    if (attempts >= 30) return;
+    moveButton();
+    attempts++;
+    if (attempts === 30) revealSecret();
+  }
+});
+
+catchBtn.addEventListener("touchstart", (e) => {
+  if (attempts >= 30) return;
+  moveButton();
+  attempts++;
+  e.preventDefault();
+  if (attempts === 30) revealSecret();
+}, { passive: false });
+
+function revealSecret() {
+  catchBtn.style.display = "none";
+  secretMsg.style.display = "block";
+}
+
 
