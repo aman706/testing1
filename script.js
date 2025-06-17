@@ -120,20 +120,27 @@ const catchTexts = [
 ];
 
 function moveButton() {
-const btnWidth = catchBtn.offsetWidth;
-const btnHeight = catchBtn.offsetHeight;
-const padding = 20;
+  const btnWidth = catchBtn.offsetWidth;
+  const btnHeight = catchBtn.offsetHeight;
+  const padding = 20;
 
-const x = Math.random() * (window.innerWidth - btnWidth - padding);
-const y = Math.random() * (window.innerHeight - btnHeight - padding);
+  const maxX = window.innerWidth - btnWidth - padding;
+  const maxY = window.innerHeight - btnHeight - padding;
 
-catchBtn.style.left = `${x}px`;
-catchBtn.style.top = `${y}px`;
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
 
   catchBtn.style.left = `${x}px`;
   catchBtn.style.top = `${y}px`;
+
+  // Optional: Add funny text
+  const catchTexts = [
+    "Too Slow!", "Missed Me!", "Try Again!", "Haha!", "Almost!",
+    "Nope!", "Nice Try!", "Keep Going!", "Getting Closer!", "You Wish!"
+  ];
   catchBtn.innerText = catchTexts[Math.floor(Math.random() * catchTexts.length)];
 }
+
 
 document.addEventListener("mousemove", (e) => {
   const rect = catchBtn.getBoundingClientRect();
