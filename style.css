@@ -410,3 +410,36 @@ body:not(.dark) .floating-icons span:nth-child(3) {
     transform: rotate(360deg);
   }
 }
+#catch-wrapper {
+  position: fixed;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+}
+
+#catch-me {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #00ffe1;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, left 0.2s, top 0.2s;
+  position: absolute;
+}
+
+#secret-msg {
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #111;
+  color: #00ffe1;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 20px;
+  z-index: 9999;
+  text-align: center;
+}
