@@ -79,3 +79,36 @@ window.addEventListener("load", function () {
     loader.style.display = "none";
   }
 });
+// 🌟 Easter Egg: Emoji Trail on Click
+document.addEventListener("click", function (e) {
+  const emojiList = ["✨", "💫", "🪄", "🌟", "🧠", "👾", "🚀", "🔥", "💥"];
+  const emoji = document.createElement("div");
+
+  emoji.innerHTML = emojiList[Math.floor(Math.random() * emojiList.length)];
+  emoji.style.position = "absolute";
+  emoji.style.left = `${e.pageX}px`;
+  emoji.style.top = `${e.pageY}px`;
+  emoji.style.fontSize = "20px";
+  emoji.style.zIndex = "9999";
+  emoji.style.pointerEvents = "none";
+  emoji.style.animation = "fadeOutUp 1s ease-out forwards";
+  
+  document.body.appendChild(emoji);
+  setTimeout(() => emoji.remove(), 1000);
+});
+
+// Add animation keyframe
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) scale(1.5);
+  }
+}`;
+document.head.appendChild(style);
+
