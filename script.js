@@ -73,8 +73,12 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
       console.error(err);
     });
 });
-
-
+window.addEventListener("load", function () {
+  const loader = document.getElementById("loader");
+  if (loader) {
+    loader.style.display = "none";
+  }
+});
 // 🌟 Easter Egg: Emoji Trail on Click
 document.addEventListener("click", function (e) {
   const emojiList = ["✨", "💫", "🪄", "🌟", "🧠", "👾", "🚀", "🔥", "💥"];
@@ -107,12 +111,11 @@ style.innerHTML = `
   }
 }`;
 document.head.appendChild(style);
-
-// 🕹️ Catch Me Button Logic
 const catchBtn = document.getElementById("catch-me");
 const secretMsg = document.getElementById("secret-msg");
 
 let attempts = 0;
+let gameStarted = false;
 let disabled = false;
 
 const catchTexts = [
@@ -133,6 +136,7 @@ function moveButton() {
 
   catchBtn.style.left = `${x}px`;
   catchBtn.style.top = `${y}px`;
+
   catchBtn.innerText = catchTexts[Math.floor(Math.random() * catchTexts.length)];
 }
 
@@ -142,7 +146,7 @@ function revealSecret() {
   secretMsg.style.display = "block";
 }
 
-// 🖱️ Mouse Movement: Move button when cursor is near (but not directly over)
+// Handle mouse movement near button
 document.addEventListener("mousemove", (e) => {
   if (disabled) return;
 
@@ -150,30 +154,31 @@ document.addEventListener("mousemove", (e) => {
   const mouseX = e.clientX;
   const mouseY = e.clientY;
 
-  const buffer = 80;
   const insideButton =
     mouseX >= rect.left &&
     mouseX <= rect.right &&
     mouseY >= rect.top &&
     mouseY <= rect.bottom;
 
-  const nearButton =
-    mouseX >= rect.left - buffer &&
-    mouseX <= rect.right + buffer &&
-    mouseY >= rect.top - buffer &&
-    mouseY <= rect.bottom + buffer;
+  const dist = Math.hypot(
+    mouseX - (rect.left + rect.width / 2),
+    mouseY - (rect.top + rect.height / 2)
+  );
 
-  if (nearButton && !insideButton) {
+  if (!gameStarted) gameStarted = true;
+
+  if (dist < 100 && !insideButton) {
     moveButton();
     attempts++;
     if (attempts === 30) revealSecret();
   }
 });
 
-// 📱 Touch for Mobile
+// Handle mobile taps
 catchBtn.addEventListener("touchstart", (e) => {
   if (disabled) return;
 
+  gameStarted = true;
   moveButton();
   attempts++;
   e.preventDefault();
@@ -181,11 +186,7 @@ catchBtn.addEventListener("touchstart", (e) => {
   if (attempts === 30) revealSecret();
 }, { passive: false });
 
-// 🖱️ Allow click after 30 tries
+// Optional: Allow clicking after 30 tries
 catchBtn.addEventListener("click", () => {
-  if (disabled) {
-    alert("🎉 You caught me after 30 tries!");
-  } else {
-    alert("😲 You actually clicked it early! Nice reflexes.");
-  }
+  if (disabled) return alert("You caught me after 30 tries!");
 });
