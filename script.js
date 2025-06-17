@@ -73,3 +73,9 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
       console.error(err);
     });
 });
+window.addEventListener("load", function () {
+  const loader = document.getElementById("loader");
+  if (loader) {
+    loader.style.display = "none";
+  }
+});
