@@ -120,8 +120,16 @@ const catchTexts = [
 ];
 
 function moveButton() {
-  const x = Math.random() * (window.innerWidth - 120);
-  const y = Math.random() * (window.innerHeight - 80);
+const btnWidth = catchBtn.offsetWidth;
+const btnHeight = catchBtn.offsetHeight;
+const padding = 20;
+
+const x = Math.random() * (window.innerWidth - btnWidth - padding);
+const y = Math.random() * (window.innerHeight - btnHeight - padding);
+
+catchBtn.style.left = `${x}px`;
+catchBtn.style.top = `${y}px`;
+
   catchBtn.style.left = `${x}px`;
   catchBtn.style.top = `${y}px`;
   catchBtn.innerText = catchTexts[Math.floor(Math.random() * catchTexts.length)];
