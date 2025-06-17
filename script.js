@@ -116,13 +116,13 @@ const secretMsg = document.getElementById("secret-msg");
 
 let attempts = 0;
 let gameStarted = false;
+let disabled = false;
 
 const catchTexts = [
   "Too Slow!", "Missed Me!", "Try Again!", "Haha!", "Almost!",
   "Nope!", "Nice Try!", "Keep Going!", "Getting Closer!", "You Wish!"
 ];
 
-// Function to move button randomly but stay within the screen
 function moveButton() {
   const btnWidth = catchBtn.offsetWidth;
   const btnHeight = catchBtn.offsetHeight;
@@ -137,19 +137,18 @@ function moveButton() {
   catchBtn.style.left = `${x}px`;
   catchBtn.style.top = `${y}px`;
 
-  // Set random funny message
   catchBtn.innerText = catchTexts[Math.floor(Math.random() * catchTexts.length)];
 }
 
-// Reveal the hidden message after 30 failed attempts
 function revealSecret() {
+  disabled = true;
   catchBtn.style.display = "none";
   secretMsg.style.display = "block";
 }
 
-// Mouse movement logic
+// Handle mouse movement near button
 document.addEventListener("mousemove", (e) => {
-  gameStarted = true;
+  if (disabled) return;
 
   const rect = catchBtn.getBoundingClientRect();
   const mouseX = e.clientX;
@@ -161,26 +160,34 @@ document.addEventListener("mousemove", (e) => {
     mouseY >= rect.top &&
     mouseY <= rect.bottom;
 
-  const dist = Math.hypot(mouseX - (rect.left + rect.width / 2), mouseY - (rect.top + rect.height / 2));
+  const dist = Math.hypot(
+    mouseX - (rect.left + rect.width / 2),
+    mouseY - (rect.top + rect.height / 2)
+  );
 
-  if (dist < 100 && !insideButton && gameStarted) {
-    if (attempts >= 30) return;
+  if (!gameStarted) gameStarted = true;
+
+  if (dist < 100 && !insideButton) {
     moveButton();
     attempts++;
     if (attempts === 30) revealSecret();
   }
 });
 
-// Touch logic for mobile
+// Handle mobile taps
 catchBtn.addEventListener("touchstart", (e) => {
-  gameStarted = true;
+  if (disabled) return;
 
-  if (attempts >= 30) return;
+  gameStarted = true;
   moveButton();
   attempts++;
   e.preventDefault();
+
   if (attempts === 30) revealSecret();
 }, { passive: false });
 
-
+// Optional: Allow clicking after 30 tries
+catchBtn.addEventListener("click", () => {
+  if (disabled) return alert("You caught me after 30 tries!");
+});
 
