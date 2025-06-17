@@ -74,13 +74,6 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
     });
 });
 
-// LOADER
-window.addEventListener("load", function () {
-  const loader = document.getElementById("loader");
-  if (loader) {
-    loader.style.display = "none";
-  }
-});
 
 // 🌟 Easter Egg: Emoji Trail on Click
 document.addEventListener("click", function (e) {
