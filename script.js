@@ -1,4 +1,4 @@
-// DARK MODE TOGGLE
+// DARK MODE TOGGLEMore actions
 const body = document.body;
 const darkModeToggle = document.getElementById("darkModeToggle");
 if (localStorage.getItem("dark-mode") === "true") body.classList.add("dark");
@@ -92,7 +92,7 @@ document.addEventListener("click", function (e) {
   emoji.style.zIndex = "9999";
   emoji.style.pointerEvents = "none";
   emoji.style.animation = "fadeOutUp 1s ease-out forwards";
-  
+
   document.body.appendChild(emoji);
   setTimeout(() => emoji.remove(), 1000);
 });
@@ -113,80 +113,51 @@ style.innerHTML = `
 document.head.appendChild(style);
 const catchBtn = document.getElementById("catch-me");
 const secretMsg = document.getElementById("secret-msg");
-
 let attempts = 0;
-let gameStarted = false;
-let disabled = false;
-
 const catchTexts = [
-  "Too Slow!", "Missed Me!", "Try Again!", "Haha!", "Almost!",
+  "Too Slow!", "Missed Me!", "Try Again!", "Haha!", "Almost!", 
   "Nope!", "Nice Try!", "Keep Going!", "Getting Closer!", "You Wish!"
 ];
 
 function moveButton() {
-  const btnWidth = catchBtn.offsetWidth;
-  const btnHeight = catchBtn.offsetHeight;
-  const padding = 20;
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 80);
+const btnWidth = catchBtn.offsetWidth;
+const btnHeight = catchBtn.offsetHeight;
+const padding = 20;
 
-  const maxX = window.innerWidth - btnWidth - padding;
-  const maxY = window.innerHeight - btnHeight - padding;
+const x = Math.random() * (window.innerWidth - btnWidth - padding);
+const y = Math.random() * (window.innerHeight - btnHeight - padding);
 
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
+catchBtn.style.left = `${x}px`;
+catchBtn.style.top = `${y}px`;
 
   catchBtn.style.left = `${x}px`;
   catchBtn.style.top = `${y}px`;
-
   catchBtn.innerText = catchTexts[Math.floor(Math.random() * catchTexts.length)];
 }
 
-function revealSecret() {
-  disabled = true;
-  catchBtn.style.display = "none";
-  secretMsg.style.display = "block";
-}
-
-// Handle mouse movement near button
 document.addEventListener("mousemove", (e) => {
-  if (disabled) return;
-
   const rect = catchBtn.getBoundingClientRect();
-  const mouseX = e.clientX;
-  const mouseY = e.clientY;
-
-  const insideButton =
-    mouseX >= rect.left &&
-    mouseX <= rect.right &&
-    mouseY >= rect.top &&
-    mouseY <= rect.bottom;
-
-  const dist = Math.hypot(
-    mouseX - (rect.left + rect.width / 2),
-    mouseY - (rect.top + rect.height / 2)
-  );
-
-  if (!gameStarted) gameStarted = true;
-
-  if (dist < 100 && !insideButton) {
+  const dist = Math.hypot(e.clientX - rect.left, e.clientY - rect.top);
+  if (dist < 100) {
+    if (attempts >= 30) return;
     moveButton();
     attempts++;
     if (attempts === 30) revealSecret();
   }
 });
 
-// Handle mobile taps
 catchBtn.addEventListener("touchstart", (e) => {
-  if (disabled) return;
-
-  gameStarted = true;
+  if (attempts >= 30) return;
   moveButton();
   attempts++;
   e.preventDefault();
-
   if (attempts === 30) revealSecret();
 }, { passive: false });
 
-// Optional: Allow clicking after 30 tries
-catchBtn.addEventListener("click", () => {
-  if (disabled) return alert("You caught me after 30 tries!");
-});
+function revealSecret() {
+  catchBtn.style.display = "none";
+  secretMsg.style.display = "block";
+}
+
